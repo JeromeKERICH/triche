@@ -1,5 +1,6 @@
 import { BoltIcon } from '@heroicons/react/16/solid';
 import { BanIcon, ChartBarBigIcon, ChartBarIcon, CircleArrowRightIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const ProblemSolutionSection = () => {
@@ -67,9 +68,9 @@ const ProblemSolutionSection = () => {
             </h3>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               
-              <button className="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 border border-white/20">
+              <Link to="/learn" className="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 border border-white/20">
                 How It Works
-              </button>
+              </Link>
             </div>
           </div>
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>

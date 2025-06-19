@@ -16,7 +16,7 @@ const ServicesPreview = () => {
       description: "High-converting pages that turn your audience into paying clients",
       icon: <ArrowUp10Icon className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
-      link: "#landing-pages" // Replace with actual link
+      link: "/linkedin" // Replace with actual link
     },
     {
       title: "NGO & Educational Websites",

@@ -1,5 +1,6 @@
 
 import { ArrowRightIcon, ArrowUp10Icon, LightbulbIcon, SchoolIcon, ShieldIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const ServicesPreview = () => {
@@ -16,7 +17,7 @@ const ServicesPreview = () => {
       description: "High-converting pages that turn your audience into paying clients",
       icon: <ArrowUp10Icon className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
-      link: "/linkedin" // Replace with actual link
+      link: "/linkedin" 
     },
     {
       title: "NGO & Educational Websites",
@@ -72,13 +73,12 @@ const ServicesPreview = () => {
                 <p className="text-gray-600 mb-2 text-sm">{service.description}</p>
               </div>
               <div className="px-6 pb-3">
-                <a 
-                  href={service.link} 
+                <Link to={service.link} 
                   className="inline-flex text-sm items-center mt-0 text-orange-600 hover:text-emerald-800 font-medium transition-colors duration-300 group-hover:underline"
                 >
                   Learn more
                   <ArrowRightIcon className="w-4 h-4 ml-1.5" />
-                </a>
+                </Link>
               </div>
             </div>
           ))}

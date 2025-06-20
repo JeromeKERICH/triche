@@ -10,7 +10,7 @@ const ServicesPreview = () => {
       description: "Complete websites designed to convert visitors into clients from day one",
       icon: <LightbulbIcon className="h-8 w-8 text-emerald-500" />,
       image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
-      link: "#website-strategy" // Replace with actual link
+      link: "/design" // Replace with actual link
     },
     {
       title: "Landing Pages for LinkedIn Creators",
@@ -24,7 +24,7 @@ const ServicesPreview = () => {
       description: "Mission-driven designs that amplify your impact and credibility",
       icon: <SchoolIcon className="h-8 w-8 text-emerald-500" />,
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
-      link: "#ngo-websites" // Replace with actual link
+      link: "/corparate" // Replace with actual link
     },
     {
       title: "Ongoing Support & Growth",

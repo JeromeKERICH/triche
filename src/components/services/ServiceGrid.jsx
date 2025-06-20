@@ -9,10 +9,9 @@ import {
   ShoppingCart, 
   Rocket 
 } from 'lucide-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const ServicesGrid = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -26,14 +25,15 @@ export const ServicesGrid = () => {
 
   const services = [
     {
-      title: "Strategic Web Foundation",
+      title: "Web Foundation",
+      icon: <Monitor className="h-5 w-5" />,
       items: [
         {
           name: "Custom Website Design",
           icon: <Monitor className="h-8 w-8 text-emerald-500" />,
           image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
           benefits: [
-            "4-week launch timeline",
+            "1-week launch timeline",
             "Mobile-optimized design",
             "SEO-ready structure",
             "3 conversion-focused pages"
@@ -67,7 +67,8 @@ export const ServicesGrid = () => {
       ]
     },
     {
-      title: "Growth Accelerators",
+      title: "Accelerators",
+      icon: <Rocket className="h-5 w-5" />,
       items: [
         {
           name: "LinkedIn Creator Packages",
@@ -109,6 +110,7 @@ export const ServicesGrid = () => {
     },
     {
       title: "Ongoing Support",
+      icon: <Wrench className="h-5 w-5" />,
       items: [
         {
           name: "Care Plans",
@@ -138,70 +140,44 @@ export const ServicesGrid = () => {
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === services.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? services.length - 1 : prev - 1));
-  };
-
   return (
-    <section className="relative bg-gray-200 py-5 md:py-10 lg:py-15 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-gray-200 py-5 sm:py-8 md:py-10 lg:py-15 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-orange-100 blur-3xl opacity-40"></div>
-
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl text-start md:text-center md:text-4xl font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
+          <h2 className="text-3xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
             Web Solutions Built for Results
           </h2>
         </div>
 
-        {/* Mobile Carousel */}
-        {isMobile ? (
-          <div className="relative overflow-hidden">
-            <div 
-              className="flex transition-transform duration-300 ease-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-              {services.map((group, groupIdx) => (
-                <div key={groupIdx} className="w-full flex-shrink-0 px-2">
-                  <ServiceCard group={group} />
-                </div>
-              ))}
-            </div>
-            <button 
-              onClick={prevSlide}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
-            >
-              <ChevronLeft className="h-6 w-6 text-gray-900" />
-            </button>
-            <button 
-              onClick={nextSlide}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
-            >
-              <ChevronRight className="h-6 w-6 text-gray-900" />
-            </button>
-            <div className="flex justify-center mt-4 space-x-2">
-              {services.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`w-2 h-2 rounded-full ${currentSlide === idx ? 'bg-emerald-500' : 'bg-gray-300'}`}
-                />
-              ))}
-            </div>
-          </div>
-        ) : (
-          /* Desktop Grid */
-          <div className="space-y-12">
-            {services.map((group, groupIdx) => (
-              <ServiceCard key={groupIdx} group={group} />
+        {/* Mobile Tabs */}
+        {isMobile && (
+          <div className="flex mb-6 border-b border-gray-200">
+            {services.map((service, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                className={`flex-1 py-3 px-1 text-center border-b-2 font-medium text-sm flex items-center justify-center gap-1 ${activeTab === index ? 'border-emerald-500 text-emerald-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              >
+                {service.icon}
+                {service.title}
+              </button>
             ))}
           </div>
         )}
+
+        {/* Content */}
+        <div className="space-y-12">
+          {isMobile ? (
+            <ServiceCard group={services[activeTab]} />
+          ) : (
+            services.map((group, groupIdx) => (
+              <ServiceCard key={groupIdx} group={group} />
+            ))
+          )}
+        </div>
       </div>
     </section>
   );
@@ -210,12 +186,14 @@ export const ServicesGrid = () => {
 const ServiceCard = ({ group }) => {
   return (
     <div className="space-y-6">
-      <h3 className="text-xl font-bold text-gray-900 font-serif">{group.title}</h3>
+      {!group.icon && ( // Only show title if not mobile (where we have tabs)
+        <h3 className="text-xl font-bold text-gray-900">{group.title}</h3>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {group.items.map((service, serviceIdx) => (
           <div 
             key={serviceIdx} 
-            className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-emerald-300 transition-all duration-300 hover:shadow-lg group"
+            className="bg-white rounded-xl p-6 border border-gray-200 hover:border-emerald-300 transition-all duration-300 hover:shadow-lg group"
           >
             <div 
               className="h-40 bg-cover bg-center rounded-lg mb-4 relative overflow-hidden"
@@ -228,7 +206,7 @@ const ServiceCard = ({ group }) => {
               </div>
             </div>
             <div>
-              <h4 className="text-lg font-sans font-bold text-gray-900 mb-3">{service.name}</h4>
+              <h4 className="text-lg font-bold text-gray-900 mb-3">{service.name}</h4>
               <ul className="space-y-2 mb-4">
                 {service.benefits.map((benefit, idx) => (
                   <li key={idx} className="flex items-start">
@@ -237,13 +215,7 @@ const ServiceCard = ({ group }) => {
                   </li>
                 ))}
               </ul>
-              <a 
-                href={service.link} 
-                className="inline-flex items-center text-emerald-600 hover:text-emerald-800 font-medium mt-4 group-hover:underline"
-              >
-                Learn more
-                <ChevronRight className="w-4 h-4 ml-1.5" />
-              </a>
+             
             </div>
           </div>
         ))}
@@ -255,5 +227,11 @@ const ServiceCard = ({ group }) => {
 const CheckIcon = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+const ChevronRight = ({ className }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
   </svg>
 );

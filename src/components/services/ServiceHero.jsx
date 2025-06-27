@@ -19,7 +19,7 @@ export const ServiceHero = () => {
             Whether you're a solopreneur, creator, NGO, or business, We offer tailored web solutions that attract the right audience, build credibility, and help you grow without tech overwhelm.
           </p>
           <div className="flex flex-row sm:flex-row justify-center gap-4">
-            <a href='https://calendly.com/trichenest/30min' className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center">
+            <a href='https://calendly.com/trichenest/30min' className="ml-4 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:from-orange-600 hover:to-amber-600 flex items-center">
               Book Free Consultation
               <ArrowRightIcon className="w-5 h-5 ml-2" />
             </a>

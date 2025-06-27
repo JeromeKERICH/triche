@@ -15,7 +15,7 @@ const Services = () => {
       <ServiceHero/>
       <ServicesGrid/>
       <TrustSection/>
-      <CaseStudy/>
+ 
      
     </div>
   )

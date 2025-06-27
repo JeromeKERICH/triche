@@ -9,7 +9,7 @@ export const StrategyProblem = () => {
           <span className="inline-block bg-red-600 text-white text-sm font-semibold px-4 py-1 rounded-full mb-3">
             The Reality
           </span>
-          <h2 className="text-3xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
+          <h2 className="text-2xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
             Why Most Websites <span className="text-red-500">Waste Time and Money</span>
           </h2>
         </div>

@@ -36,6 +36,11 @@ export const ImagineSection = () => {
           <div className="md:flex">
             <div className="md:w-1/2 bg-gray-100 h-64 md:h-auto">
               {/* Placeholder for website mockup */}
+              <img 
+                src="/assets/mock.png"
+                alt="Website Mockup"
+                className="w-full h-full object-cover"
+              />
               <div className="h-full flex items-center justify-center text-gray-500">
                 Website Mockup
               </div>
@@ -60,9 +65,7 @@ export const ImagineSection = () => {
                   </li>
                 ))}
               </ul>
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300">
-                See Examples
-              </button>
+              
             </div>
           </div>
         </div>

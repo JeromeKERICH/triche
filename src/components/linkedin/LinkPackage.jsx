@@ -81,7 +81,7 @@ export const LinkedinPackages = () => {
             <span className="inline-block bg-black text-white text-sm font-semibold px-4 py-1 rounded-full mb-3">
               Tailored Packages
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
+            <h2 className="text-3xl md:text-4xl  text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
               For Every <span className="text-emerald-600">Creator Stage</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -139,7 +139,7 @@ export const LinkedinPackages = () => {
                     className={`mt-6 w-full ${pkg.color === 'emerald' ? 'bg-emerald-600 hover:bg-emerald-700' : 
                                                           pkg.color === 'orange' ? 'bg-orange-500 hover:bg-orange-600' : 
                                                           'bg-blue-900 hover:bg-blue-700'} 
-                                                          text-white font-medium py-3 rounded-lg transition-colors duration-300
+                                                          text-white font-medium py-3 rounded-full transition-colors duration-300
                                                           ${pkg.featured ? 'transform hover:scale-105' : ''}`}
                   >
                     Get {pkg.name}
@@ -153,9 +153,9 @@ export const LinkedinPackages = () => {
             <p className="text-gray-600 mb-4">
               Need something customized? Let's tailor a solution for your specific needs.
             </p>
-            <button className="border-2 border-gray-300 hover:border-emerald-500 text-gray-700 hover:text-emerald-600 font-medium py-3 px-8 rounded-lg transition-all duration-300">
+            <a href="https://calendly.com/trichenest/30min" className="border-2 border-gray-300 hover:border-emerald-500 text-gray-700 hover:text-emerald-600 font-medium py-3 px-8 rounded-lg transition-all duration-300">
               Discuss Custom Project
-            </button>
+            </a>
           </div>
         </div>
       </section>

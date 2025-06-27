@@ -1,11 +1,11 @@
 import { useState, useCallback, Fragment, useRef, useEffect } from 'react';
-import { supabase } from "../../library/supabaseClient";
+import { supabase } from '../../library/supabaseClient';
 import { Dialog, Transition } from '@headlessui/react';
 
 // Conversion rate (1 USD = 150 KSH)
 const USD_TO_KSH_RATE = 150;
 
-export const PackageModal = ({ pkg, onClose }) => {
+export const StrategyPackageModal = ({ pkg, onClose }) => {
   // State management
   const [formData, setFormData] = useState({
     name: '',
@@ -69,22 +69,25 @@ export const PackageModal = ({ pkg, onClose }) => {
 
   // Save order to database
   const saveOrder = async () => {
-    const paymentRef = `PKG-${pkg.id}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    const paymentRef = `STRAT-${pkg.id}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    
+    // For Custom Growth package, we'll need to adjust the price
+    const basePrice = pkg.name === "Custom Growth" ? 500 : pkg.price;
     
     const { data, error } = await supabase
-      .from('package_orders')
+      .from('strategy_package_orders')
       .insert([{
         package_id: pkg.id,
         package_name: pkg.name,
-        package_price: pkg.price,
+        package_price: basePrice,
         client_name: formData.name,
         client_email: formData.email,
         client_phone: formData.phone,
         business_name: formData.businessName,
         notes: formData.notes,
         status: 'pending_payment',
-        deposit_amount: pkg.price * 0.5,
-        total_amount: pkg.price,
+        deposit_amount: basePrice * 0.5,
+        total_amount: basePrice,
         payment_reference: paymentRef,
         payment_method: 'paystack',
         exchange_rate: USD_TO_KSH_RATE,
@@ -99,7 +102,7 @@ export const PackageModal = ({ pkg, onClose }) => {
   const updateOrderStatus = async (reference, status, response) => {
     try {
       const { error } = await supabase
-        .from('package_orders')
+        .from('strategy_package_orders')
         .update({
           status: status === 'success' ? 'payment_received' : 'payment_failed',
           payment_status: status,
@@ -128,8 +131,11 @@ export const PackageModal = ({ pkg, onClose }) => {
         throw new Error('Payment configuration error. Please contact support.');
       }
 
+      // For Custom Growth package, we'll need to adjust the price
+      const basePrice = pkg.name === "Custom Growth" ? 500 : pkg.price;
+      
       // Convert USD to KSH and then to kobo (1 KSH = 100 kobo)
-      const amountInKobo = Math.round(pkg.price * 0.5 * USD_TO_KSH_RATE * 100);
+      const amountInKobo = Math.round(basePrice * 0.5 * USD_TO_KSH_RATE * 100);
       
       paymentCallbacks.current.onSuccess = async (response) => {
         try {
@@ -236,6 +242,11 @@ export const PackageModal = ({ pkg, onClose }) => {
     return Math.round(usdAmount * USD_TO_KSH_RATE);
   };
 
+  // Get the base price (handles Custom Growth package)
+  const getBasePrice = () => {
+    return pkg.name === "Custom Growth" ? 500 : pkg.price;
+  };
+
   // Render payment button with proper state
   const renderPaymentButton = () => {
     if (!paystackReady) {
@@ -256,8 +267,8 @@ export const PackageModal = ({ pkg, onClose }) => {
         className={`px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white ${
           pkg.color === 'emerald' ? 'bg-emerald-600 hover:bg-emerald-700' : 
           pkg.color === 'orange' ? 'bg-orange-600 hover:bg-orange-700' : 
-          'bg-blue-600 hover:bg-blue-700'
-        } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+          'bg-red-600 hover:bg-red-700'
+        } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
       >
         {isSubmitting ? (
           <span className="flex items-center">
@@ -274,6 +285,8 @@ export const PackageModal = ({ pkg, onClose }) => {
 
   // Render current step
   const renderStep = () => {
+    const basePrice = getBasePrice();
+    
     switch (currentStep) {
       case 'form':
         return (
@@ -360,7 +373,7 @@ export const PackageModal = ({ pkg, onClose }) => {
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <label htmlFor="payNow" className="ml-2 block text-sm text-gray-700">
-                  Pay 50% deposit now (${(pkg.price * 0.5).toFixed(2)} USD ≈ {calculateKshAmount(pkg.price * 0.5)} KSH) via Paystack
+                  Pay 50% deposit now (${(basePrice * 0.5).toFixed(2)} USD ≈ {calculateKshAmount(basePrice * 0.5)} KSH) via Paystack
                 </label>
               </div>
             </div>
@@ -378,7 +391,7 @@ export const PackageModal = ({ pkg, onClose }) => {
                 className={`px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white ${
                   pkg.color === 'emerald' ? 'bg-emerald-600 hover:bg-emerald-700' : 
                   pkg.color === 'orange' ? 'bg-orange-600 hover:bg-orange-700' : 
-                  'bg-blue-600 hover:bg-blue-700'
+                  'bg-red-600 hover:bg-red-700'
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
               >
                 Continue
@@ -399,8 +412,13 @@ export const PackageModal = ({ pkg, onClose }) => {
               </div>
               <div className="flex justify-between mb-2">
                 <span className="text-gray-600">Deposit Amount:</span>
-                <span className="font-medium">${(pkg.price * 0.5).toFixed(2)} USD (≈ {calculateKshAmount(pkg.price * 0.5)} KSH)</span>
+                <span className="font-medium">${(basePrice * 0.5).toFixed(2)} USD (≈ {calculateKshAmount(basePrice * 0.5)} KSH)</span>
               </div>
+              {pkg.name === "Custom Growth" && (
+                <div className="text-sm text-gray-600 mb-2">
+                  Note: Final price will be determined after our initial consultation
+                </div>
+              )}
               <div className="flex justify-between mb-2">
                 <span className="text-gray-600">Full Name:</span>
                 <span className="font-medium">{formData.name}</span>
@@ -457,7 +475,7 @@ export const PackageModal = ({ pkg, onClose }) => {
             </h3>
             <p className="text-sm text-gray-500">
               {paymentInitialized 
-                ? `Completing payment of $${(pkg.price * 0.5).toFixed(2)} USD (≈ ${calculateKshAmount(pkg.price * 0.5)} KSH)...`
+                ? `Completing payment of $${(basePrice * 0.5).toFixed(2)} USD (≈ ${calculateKshAmount(basePrice * 0.5)} KSH)...`
                 : 'Initializing payment system...'}
             </p>
             {!paymentInitialized && !paystackReady && (
@@ -476,11 +494,14 @@ export const PackageModal = ({ pkg, onClose }) => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
         <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
           <div className={`p-6 ${pkg.color === 'emerald' ? 'bg-emerald-600' : 
-                         pkg.color === 'orange' ? 'bg-orange-600' : 'bg-blue-600'} text-white`}>
+                         pkg.color === 'orange' ? 'bg-orange-600' : 'bg-red-600'} text-white`}>
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="text-2xl font-bold">{pkg.name}</h3>
-                <p className="text-xl font-semibold">${pkg.price} USD (≈ {calculateKshAmount(pkg.price)} KSH)</p>
+                <p className="text-xl font-semibold">
+                  {pkg.name === "Custom Growth" ? "Starting from $500" : `$${pkg.price}`} USD 
+                  (≈ {calculateKshAmount(pkg.name === "Custom Growth" ? 500 : pkg.price)} KSH)
+                </p>
               </div>
               <button 
                 onClick={onClose}
@@ -544,8 +565,9 @@ export const PackageModal = ({ pkg, onClose }) => {
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         {formData.payNow 
-                          ? `Your deposit of $${(pkg.price * 0.5).toFixed(2)} USD (≈ ${calculateKshAmount(pkg.price * 0.5)} KSH) has been received. We'll contact you shortly to begin your project.`
+                          ? `Your deposit of $${(getBasePrice() * 0.5).toFixed(2)} USD (≈ ${calculateKshAmount(getBasePrice() * 0.5)} KSH) has been received. We'll contact you shortly to begin your project.`
                           : 'We have received your request and will contact you shortly to arrange payment and begin your project.'}
+                        {pkg.name === "Custom Growth" && " We'll schedule a consultation to finalize your requirements."}
                       </p>
                     </div>
                   </div>

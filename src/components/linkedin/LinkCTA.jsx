@@ -1,4 +1,5 @@
 export const FinalLinkedInCTA = () => {
+  
   return (
     <section className="relative bg-gradient-to-br from-gray-900 to-black py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-4xl mx-auto text-center">
@@ -10,7 +11,7 @@ export const FinalLinkedInCTA = () => {
         </p>
         
         <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/20">
-          Take the 1-Minute Survey
+          Coming Soon
         </button>
         
         <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">

@@ -8,7 +8,7 @@ const ServicesPreview = () => {
     {
       title: "Website Strategy & Design",
       description: "Complete websites designed to convert visitors into clients from day one",
-      icon: <LightbulbIcon className="h-8 w-8 text-emerald-500" />,
+      icon: <LightbulbIcon className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
       link: "/design" // Replace with actual link
     },
@@ -22,17 +22,11 @@ const ServicesPreview = () => {
     {
       title: "NGO & Educational Websites",
       description: "Mission-driven designs that amplify your impact and credibility",
-      icon: <SchoolIcon className="h-8 w-8 text-emerald-500" />,
+      icon: <SchoolIcon className="h-8 w-8 text-orange-500" />,
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
       link: "/corparate" // Replace with actual link
     },
-    {
-      title: "Ongoing Support & Growth",
-      description: "Continuous optimization to keep your site performing at its peak",
-      icon: <ShieldIcon className="h-8 w-8 text-orange-500" />,
-      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
-      link: "#ongoing-support" // Replace with actual link
-    }
+    
   ];
 
   return (
@@ -41,7 +35,7 @@ const ServicesPreview = () => {
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-orange-100 blur-3xl opacity-40"></div>
       
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl text-start md:text-center md:text-4xl font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
             Solutions Designed to Help You
@@ -52,7 +46,7 @@ const ServicesPreview = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           {services.map((service, index) => (
             <div 
               key={index} 
@@ -86,7 +80,7 @@ const ServicesPreview = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <button className="bg-emerald-600 hover:bg-emerald-700 text-sm text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+          <button className="bg-emerald-600 hover:bg-emerald-700 text-sm text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 inline-flex items-center">
             See All Services
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -16,9 +16,9 @@ export const NgoHero = () => {
         <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
           You've tried to build (maybe even rebuilt) your website before, and it still doesn't capture who you are or what you stand for. We take a strategy-first approach to create websites that inspire trust, communicate clearly, and make an impact.
         </p>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-teal-500/20">
+        <a href="https://calendly.com/trichenest/30min" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-teal-500/20">
           Let's Discuss Your Project
-        </button>
+        </a>
       </div>
         </div>
     </section>

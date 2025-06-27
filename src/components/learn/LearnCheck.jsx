@@ -32,8 +32,8 @@ export const ChecklistCTA = () => {
             ))}
           </ul>
           
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-            Take the 1-Minute Survey
+          <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+            Coming Soon
           </button>
           <p className="text-gray-500 text-sm mt-3">No fluff. Just clarity.</p>
         </div>

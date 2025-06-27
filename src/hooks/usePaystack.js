@@ -2,39 +2,22 @@
 import { useEffect, useState } from 'react';
 
 export const usePaystack = () => {
-  const [state, setState] = useState({
-    loaded: false,
-    error: null
-  });
+  const [error, setError] = useState(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (window.PaystackPop) {
-      setState({ loaded: true, error: null });
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://js.paystack.co/v1/inline.js';
-    script.async = true;
-    
-    script.onload = () => {
-      if (window.PaystackPop) {
-        setState({ loaded: true, error: null });
+    const checkPaystack = () => {
+      if (window.PaystackPop && window.PaystackPop.setup) {
+        setIsReady(true);
       } else {
-        setState({ loaded: false, error: 'Paystack failed to load' });
+        setTimeout(checkPaystack, 500);
       }
     };
-    
-    script.onerror = () => {
-      setState({ loaded: false, error: 'Failed to load Paystack script' });
-    };
 
-    document.body.appendChild(script);
+    checkPaystack();
 
-    return () => {
-      document.body.removeChild(script);
-    };
+    return () => clearTimeout(checkPaystack);
   }, []);
 
-  return state;
+  return { error, isReady };
 };

@@ -31,7 +31,7 @@ const ProblemSolutionSection = () => {
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-emerald-100 blur-3xl opacity-40"></div>
       
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative max-w-5xl mx-auto">
         <div className="text-center mb-16">
           
           <p className="text-l md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">

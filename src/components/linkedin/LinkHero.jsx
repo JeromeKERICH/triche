@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { LinkedInSurveyModal } from './LinkedInSurveyModal';
 import { ArrowRightIcon } from 'lucide-react';
@@ -6,36 +5,43 @@ import { ArrowRightIcon } from 'lucide-react';
 export const LinkedInHero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reportData, setReportData] = useState(null);
+  const [isComingSoon, setIsComingSoon] = useState(false);
 
   const handleSubmitSurvey = async (formData) => {
-  try {
-    const response = await fetch('http://localhost:5000/api/generate-blueprint', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ formData }),
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch('http://localhost:5000/api/generate-blueprint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ formData }),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setReportData(data);
+      } else {
+        throw new Error(data.error || 'Failed to generate report');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to generate report. Please try again.');
     }
-    
-    const data = await response.json();
-    
-    if (data.success) {
-      setReportData(data);
-    } else {
-      throw new Error(data.error || 'Failed to generate report');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Failed to generate report. Please try again.');
-  }
-};
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setReportData(null);
+  };
+
+  const handleComingSoon = () => {
+    setIsComingSoon(true);
+    setTimeout(() => setIsComingSoon(false), 3000); // Message disappears after 3 seconds
   };
 
   return (
@@ -50,16 +56,24 @@ export const LinkedInHero = () => {
           Turn your LinkedIn profile into a client-converting machine
           Now let's give your audience a place to land, and a reason to buy.
         </p>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
-        >
-          Take the 1-Minute Survey
-          <ArrowRightIcon className="w-5 h-5 ml-2" />
-        </button>
+        <div className="relative">
+          <button 
+            onClick={handleComingSoon}
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
+          >
+            Take the 1-Minute Survey
+            <ArrowRightIcon className="w-5 h-5 ml-2" />
+          </button>
+          {isComingSoon && (
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gray-800 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap">
+              Coming Soon! We're working hard to deliver the best experience.
+            </div>
+          )}
+        </div>
         <p className="text-gray-400 mt-4 text-sm">Get Your Free Website Blueprint</p>
       </div>
 
+      {/* Keep the modal in the code but it won't be triggered */}
       <LinkedInSurveyModal 
         isOpen={isModalOpen} 
         onClose={handleCloseModal}
@@ -69,7 +83,3 @@ export const LinkedInHero = () => {
     </section>
   );
 };
-
-
-
-

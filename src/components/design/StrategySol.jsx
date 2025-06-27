@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const SolutionSection = () => {
   return (
     <section className="relative bg-gray-200 py-5 sm:py-8 md:py-10 lg:py-15 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -9,7 +11,7 @@ export const SolutionSection = () => {
           <span className="inline-block bg-emerald-600 text-white text-sm font-semibold px-4 py-1 rounded-full mb-3">
             The Solution
           </span>
-          <h2 className="text-3xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
+          <h2 className="text-2xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
             What You <span className="text-emerald-600">Really Need</span> Before You Build
           </h2>
         </div>
@@ -32,27 +34,6 @@ export const SolutionSection = () => {
               <p className="text-gray-800">{item}</p>
             </div>
           ))}
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="md:flex">
-            <div className="md:w-1/3 bg-emerald-600 p-6 flex items-center justify-center">
-              <div className="text-white text-center">
-                <svg className="h-12 w-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <h3 className="text-xl font-bold">Website Strategy</h3>
-              </div>
-            </div>
-            <div className="md:w-2/3 p-6">
-              <p className="text-gray-700 mb-4">
-                This is where Website Strategy comes in. It gives you a <span className="font-semibold">plan</span>, not just a pretty screen.
-              </p>
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
-                Learn About Our Process
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

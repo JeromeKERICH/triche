@@ -4,7 +4,7 @@ import { StrategyProblem } from '../components/design/StrategyProb';
 import { SolutionSection } from '../components/design/StrategySol';
 import { StrategyProcess } from '../components/design/StrategyProcess';
 import { StrategyPackages } from '../components/design/StrategyPackage';
-import { FinalStrategyCTA } from '../components/design/StrategyCTA';
+
 
 const Design = () => {
     useEffect(() => {
@@ -14,10 +14,11 @@ const Design = () => {
     <div>
       <StrategyHero/>
       <StrategyProblem/>
+      <StrategyPackages/>
       <SolutionSection/>
       <StrategyProcess/>
-      <StrategyPackages/>
-      <FinalStrategyCTA/>
+      
+    
     </div>
   )
 }

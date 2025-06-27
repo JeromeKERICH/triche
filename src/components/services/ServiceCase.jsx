@@ -18,7 +18,7 @@ export const CaseStudy = () => {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">NGO Website Transformation</h3>
               <p className="text-gray-600 mb-6">
-                Before working with us, this Toto Village struggled with low donor engagement and poor mobile experience. We completely redesigned their digital presence with a conversion-focused approach.
+                Before working with us, this Morning Star struggled without engagement. We completely designed their digital presence with a conversion-focused approach.
               </p>
               
               <div className="grid grid-cols-3 gap-4 mb-6">

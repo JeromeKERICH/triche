@@ -10,10 +10,8 @@ export const PortfolioCTA = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-orange-600  text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-            Start Your Project
-          </button>
-          <a href="https://calendly.com/trichenest/30min" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
+          
+          <a href="https://calendly.com/trichenest/30min" className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-8 rounded-full transition-all duration-300">
             Book Free Strategy Call
           </a>
         </div>

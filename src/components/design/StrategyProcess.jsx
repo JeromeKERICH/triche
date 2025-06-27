@@ -36,7 +36,7 @@ export const StrategyProcess = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-orange-100 blur-3xl opacity-40"></div>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
+          <h2 className="text-2xl md:text-4xl text-start md:text-center font-bold text-gray-900 mb-4 font-serif drop-shadow-sm">
             How We Work <span className="text-emerald-600">Differently</span>
           </h2>
           <p className="text-xl text-gray-600">

@@ -13,8 +13,9 @@ const Linkedin = () => {
     <div>
       <LinkedInHero/>
       <LinkedInProblem/>
-      <ImagineSection/>
       <LinkedinPackages/>
+      <ImagineSection/>
+      
       <FinalLinkedInCTA/>
     </div>
   )

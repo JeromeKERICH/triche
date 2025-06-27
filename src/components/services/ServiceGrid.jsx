@@ -25,7 +25,7 @@ export const ServicesGrid = () => {
 
   const services = [
     {
-      title: "Web Foundation",
+      title: "Foundation",
       icon: <Monitor className="h-5 w-5" />,
       items: [
         {
@@ -109,7 +109,7 @@ export const ServicesGrid = () => {
       ]
     },
     {
-      title: "Ongoing Support",
+      title: "Support",
       icon: <Wrench className="h-5 w-5" />,
       items: [
         {
@@ -135,7 +135,20 @@ export const ServicesGrid = () => {
             "Technical SEO fixes"
           ],
           link: "#seo-maintenance"
+        }, 
+        {
+          name: "Content Management",
+          icon: <Monitor className="h-8 w-8 text-emerald-500" />,
+          image: "https://images.unsplash.com/photo-1521791136060-2f1b3c6d4a5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+          benefits: [
+            "Content updates",
+            "Blog management",
+            "Image optimization",
+            "Performance monitoring"
+          ],
+          link: "#content-management"
         }
+
       ]
     }
   ];

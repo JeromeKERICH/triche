@@ -3,6 +3,7 @@ import { PortfolioHero } from '../components/portfolio/PortfolioHero'
 import { TestimonialGrid } from '../components/portfolio/PortfolioTestimonial'
 import { PortfolioCTA } from '../components/portfolio/PortfolioCTA'
 import { ProjectShowcase } from '../components/portfolio/PortfolioGrid'
+import { DesignProcess } from '../components/portfolio/PortfolioProcess'
 
 const Portfolio = () => {
     useEffect(() => {
@@ -13,6 +14,7 @@ const Portfolio = () => {
       <PortfolioHero/>
       <ProjectShowcase/>
       <TestimonialGrid/>
+      <DesignProcess/>
       <PortfolioCTA/>
       
     </div>
